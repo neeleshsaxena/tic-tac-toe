@@ -37,28 +37,31 @@ class Game extends React.Component {
     const intToAdd = player === 'X' ? 1 : -1; // X -> 1... O -> -1
     const newRows = this.state.rows.slice();
     const newCols = this.state.cols.slice();
-    newRows[x] += intToAdd;
-    newCols[y] += intToAdd;
     let diagonal = this.state.diagonal;
     let antiDiagonal = this.state.antiDiagonal;
+
+    newRows[x] += intToAdd;
+    newCols[y] += intToAdd;
     if (x === y) {
-        diagonal += intToAdd;
+      diagonal += intToAdd;
     }
     if (y === newRows.length - x - 1) {
-        antiDiagonal += intToAdd;
+      antiDiagonal += intToAdd;
     }
     const size = newRows.length;
-    if (Math.abs(newRows[x]) === size || 
-            Math.abs(newCols[y]) === size ||
-            Math.abs(diagonal) === size ||
-            Math.abs(antiDiagonal) === size
-        ) {
-            return { winner: player };
-          } else {
-            return { rows: newRows, cols: newCols, diagonal, antiDiagonal, player }
-          }
+    if (
+          Math.abs(newRows[x]) === size || 
+          Math.abs(newCols[y]) === size ||
+          Math.abs(diagonal) === size ||
+          Math.abs(antiDiagonal) === size
+        ) 
+        {
+          return { winner: player };
+        } else {
+          return { rows: newRows, cols: newCols, diagonal, antiDiagonal, player }
+        }
 
-  }
+    }
 
   getStatus = (currentStep, xIsNext) => {
     let status;
